@@ -9,11 +9,12 @@ import { store } from './store'
 import './App.css'
 
 const views = {
-  home: <Homepage />,
-  atelier: <Atelier />,
-  projets: <Projets />,
-  lab: <LabRusch />,
-  contact: <Contact />
+  home: Homepage,
+  atelier: Atelier,
+  projets: Projets,
+  lab: LabRusch,
+  submitArticlePage: Homepage,
+  contact: Contact
 }
 
 class App extends Component {
@@ -31,7 +32,7 @@ class App extends Component {
     return (
       <div className="App">
         <Nav onPageChange = {this.setActivePage} />
-        {views[this.state.pageActive]}
+        {views[this.state.pageActive](this.state)}
       </div>
     )
   }

@@ -3,7 +3,7 @@ import { createStore } from 'redux'
 const initialState = {
   pageActive: 'home',
   articles: [],
-  data: []
+  data: [],
 }
 
 const reducer = (state, action) => {
@@ -11,7 +11,14 @@ const reducer = (state, action) => {
 
   if (action.type === 'LOAD_ARTICLES') {
     return {
+      ...state,
       articles: action.articles
+    }
+  }
+  if (action.type === 'LOAD_SUBMIT_PAGE') {
+    return {
+      ...state,
+      pageActive: action.pageActive
     }
   }
 
@@ -21,7 +28,8 @@ const reducer = (state, action) => {
 export const store = createStore(reducer, initialState)
 
 export const actions = {
-  loadArticles: articles => store.dispatch({ type: 'LOAD_ARTICLES', articles: articles })
+  loadArticles: articles => store.dispatch({ type: 'LOAD_ARTICLES', articles: articles }),
+  loadSubmitPage: pageActive =>store.dispatch({ type: 'LOAD_SUBMIT_PAGE', pageActive: pageActive })
 }
 
 fetch(`http://localhost:3456/articles`)
